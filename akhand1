@@ -1,0 +1,61 @@
+import java.util.Arrays;
+public class Akhilesh {
+
+    static final int N = 8;
+
+    static boolean akhil(int[][] b, int r, int c)
+    {
+
+        for (int x = 0; x < c; x++)
+            if (b[r][x] == 1)
+                return false;
+
+
+        for (int x = r, y = c; x >= 0 && y >= 0;
+             x--, y--)
+            if (b[x][y] == 1)
+                return false;
+
+
+        for (int x = r, y = c; x < N && y >= 0;
+             x++, y--)
+            if (b[x][y] == 1)
+                return false;
+
+
+        return true;
+    }
+    static boolean dev(int[][] b, int c)
+    {
+
+        if (c == N) {
+            for (int[] r: b)
+                System.out.println(Arrays.toString(r));
+            System.out.println();
+            return true;
+        }
+
+
+        for (int i = 0; i < N; i++) {
+            if (akhil(b, i, c)) {
+                b[i][c] = 1;
+                if (dev(b, c+ 1))
+                    return true;
+
+                b[i][c] = 0;
+            }
+        }
+
+        return false;
+    }
+
+
+    public static void main(String[] args)
+    {
+        int[][] b = new int[N][N];
+
+        if (!dev(b, 0));
+
+    }
+
+}
